@@ -68,21 +68,19 @@ battleship = () => {
       X       0   1   2   3
           Y`);
 
-    if(xL == 0 || xL == 1 || xL == 2 || xL == 3 || xL != undefined){
-      if(yL == 0 || yL == 1 || yL == 2 || yL == 3 || yL != undefined){  
-        if(player1Turn ? player2.gameBoard[yL][xL] == 1 : player1.gameBoard[yL][xL] == 1){
-          alert(`BOOM!!!! ${curentPlayer} SUNK THE SHIP!`)
-          if(player1Turn){
-            player2.ships--;
-            player2.gameBoard[yL][xL] = 0;
-          } else{
-            player1.shhips--;
-            player1.gameBoard[yL][xL] = 0;
-          }
-        } else {
-          alert(`MISSED! Next player.`)
+    if( (!isNaN(xL) && xL >= 0 && xL <= 3) && (!isNaN(yL) && yL >= 0 && yL <= 3) ){  
+      if(player1Turn ? player2.gameBoard[yL][xL] == 1 : player1.gameBoard[yL][xL] == 1){
+        alert(`BOOM!!!! ${curentPlayer} SUNK THE SHIP!`)
+        if(player1Turn){
+          player2.ships--;
+          player2.gameBoard[yL][xL] = 0;
+        } else{
+          player1.shhips--;
+          player1.gameBoard[yL][xL] = 0;
         }
-      } 
+      } else {
+        alert(`MISSED! Next player.`)
+      }
     } else {
       alert(`You must enter a number between 0-3.`)
     }
