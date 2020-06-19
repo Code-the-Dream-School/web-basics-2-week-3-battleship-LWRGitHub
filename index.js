@@ -61,24 +61,30 @@ battleship = () => {
       X       0   1   2   3
           Y`);
     const xL = prompt(`${curentPlayer} pick a location to strike! First enter the X location 0-3
-          0 
-          1  
-          2   
-          3
+          3 
+          2  
+          1   
+          0
       X       0   1   2   3
           Y`);
 
-    if(player1Turn ? player2.gameBoard[yL][xL] == 1 : player1.gameBoard[yL][xL] == 1){
-      alert(`BOOM!!!! ${curentPlayer} SUNK THE SHIP!`)
-      if(player1Turn){
-        player2.ships--;
-        player2.gameBoard[yL][xL] = 0;
-      } else{
-        player1.shhips--;
-        player1.gameBoard[yL][xL] = 0;
-      }
+    if(xL == 0 || xL == 1 || xL == 2 || xL == 3 || xL != undefined){
+      if(yL == 0 || yL == 1 || yL == 2 || yL == 3 || yL != undefined){  
+        if(player1Turn ? player2.gameBoard[yL][xL] == 1 : player1.gameBoard[yL][xL] == 1){
+          alert(`BOOM!!!! ${curentPlayer} SUNK THE SHIP!`)
+          if(player1Turn){
+            player2.ships--;
+            player2.gameBoard[yL][xL] = 0;
+          } else{
+            player1.shhips--;
+            player1.gameBoard[yL][xL] = 0;
+          }
+        } else {
+          alert(`MISSED! Next player.`)
+        }
+      } 
     } else {
-      alert(`MISSED! Next player.`)
+      alert(`You must enter a number between 0-3.`)
     }
     
     player1Turn ? player1Turn = false : player1Turn = true;
