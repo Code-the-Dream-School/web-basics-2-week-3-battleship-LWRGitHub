@@ -68,7 +68,7 @@ battleship = () => {
       X       0   1   2   3
           Y`);
 
-    if( (!isNaN(xL) && xL >= 0 && xL <= 3) && (!isNaN(yL) && yL >= 0 && yL <= 3) ){  
+    if( (!!xL && xL >= 0 && xL <= 3) && (!!yL && yL >= 0 && yL <= 3) ){  
       if(player1Turn ? player2.gameBoard[yL][xL] == 1 : player1.gameBoard[yL][xL] == 1){
         alert(`BOOM!!!! ${curentPlayer} SUNK THE SHIP!`)
         if(player1Turn){
