@@ -12,13 +12,90 @@
 //so in general the game is a loop that takes a player turn and asks for the cordinates for the oponent's ships. loop is over when one of the players has 0 ships.
 //return value contains a string with the winner name
 
+const player1 = {
+  name: prompt(`What is player1's name?`),
+  ships: 0,
+  gameBoard: [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+};
+const player2 = {
+  name: prompt(`What is player2's name?`),
+  ships: 0,
+  gameBoard: [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+};
+
+
+let player1Turn = true;
 
 battleship = () => {
-  return
+
+  // for(let i = 0; i < 4; i ++){
+  //   Math.floor(Math.random() * Math.floor(5));
+  // }
+
+  while(player1.ships !== 4){
+    const qX = Math.floor(Math.random() * Math.floor(4));
+    const qY = Math.floor(Math.random() * Math.floor(4));
+    console.log(qX, qY);
+    if( player1.gameBoard[qY][qX] == 0){
+      player1.gameBoard[qY][qX] = 1;
+      player1.ships++
+    }
+  }
+  while( player2.ships !== 4 ){
+    const qX = Math.floor(Math.random() * Math.floor(4)); 
+    const qY = Math.floor(Math.random() * Math.floor(4));
+    if( player2.gameBoard[qY][qX] == 0){
+      player2.gameBoard[qY][qX] = 1;
+      player2.ships++
+    }
+  }
+  
+  while(player1.ships !== 0 && player2.ships !== 0){
+    const curentPlayer = player1Turn ? player1.name : player2.name;
+
+    const yL = prompt(`${curentPlayer} pick a location to strike! First enter the Y location 0-3
+          3 
+          2  
+          1   
+          0
+      X       0   1   2   3
+          Y`);
+    const xL = prompt(`${curentPlayer} pick a location to strike! First enter the X location 0-3
+          3 
+          2  
+          1   
+          0
+      X       0   1   2   3
+          Y`);
+
+    if( (!!xL && xL >= 0 && xL <= 3) && (!!yL && yL >= 0 && yL <= 3) ){  
+      if(player1Turn ? player2.gameBoard[yL][xL] == 1 : player1.gameBoard[yL][xL] == 1){
+        alert(`BOOM!!!! ${curentPlayer} SUNK THE SHIP!`)
+        if(player1Turn){
+          player2.ships--;
+          player2.gameBoard[yL][xL] = 0;
+        } else{
+          player1.shhips--;
+          player1.gameBoard[yL][xL] = 0;
+        }
+      } else {
+        alert(`MISSED! Next player.`)
+      }
+    } else {
+      alert(`You must enter a number between 0-3.`)
+    }
+    
+    player1Turn ? player1Turn = false : player1Turn = true;
+  }
+  let htmlString;
+  player1Turn ? htmlString = `${player2.name} WINS!!!` : htmlString = `${player1.name} WINS!!!`;
+  alert(htmlString);
+  
+
+  return htmlString;
 }
 
 
 const game = battleship()
-
-const htmlTarget = document.getElementById('a')
+const htmlTarget = document.getElementById('a');
 htmlTarget.innerHTML = game
